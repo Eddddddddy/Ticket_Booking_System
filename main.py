@@ -2,9 +2,10 @@ import sys
 
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
-import admin
+import admin_gui_event
 
-class MyWindow(QMainWindow, admin.Ui_Form):
+
+class MyWindow(QMainWindow, admin_gui_event.admin_event):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__(parent)
         self.setupUi(self)
