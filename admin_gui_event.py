@@ -344,12 +344,12 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
             self.pushButton_l9.setText("1") if array[67] == '1' else self.pushButton_l9.setText('0')
             self.pushButton_l10.setText("1") if array[68] == '1' else self.pushButton_l10.setText('0')
             self.pushButton_l11.setText("1") if array[69] == '1' else self.pushButton_l11.setText('0')
-        self.saveSeat()
+        self.saveSeat(item)
 
-    def saveSeat(self):
+    def saveSeat(self, item):
         array_a = []
         array_b = []
-        array_a.append(1)  # self.pushButton_a1.text()
+        array_a.append(self.pushButton_a1.text())
         array_a.append(self.pushButton_a2.text())
         array_a.append(self.pushButton_a3.text())
         array_a.append(self.pushButton_a4.text())
@@ -403,6 +403,7 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         array_b.append(self.pushButton_b9.text())
         array_b.append(self.pushButton_b10.text())
         array_b.append(self.pushButton_b11.text())
+        array_b.append(self.pushButton_c5.text())
         array_b.append(self.pushButton_c6.text())
         array_b.append(self.pushButton_c7.text())
         array_b.append(self.pushButton_c8.text())
@@ -411,6 +412,7 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         array_b.append(self.pushButton_c11.text())
         array_b.append(self.pushButton_e5.text())
         array_b.append(self.pushButton_e6.text())
+        array_b.append(self.pushButton_e7.text())
         array_b.append(self.pushButton_e8.text())
         array_b.append(self.pushButton_e9.text())
         array_b.append(self.pushButton_e10.text())
@@ -458,8 +460,9 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         array_b.append(self.pushButton_l10.text())
         array_b.append(self.pushButton_l11.text())
 
-
-        self.S.save_seat(self.list_flight.item(self.list_flight.itemAt()).text(), array_a, array_b)
+        s_a = ''.join('%s' % a for a in array_a)
+        s_b = ''.join('%s' % a for a in array_b)
+        self.S.save_seat(item.text(), s_a, s_b)
 
 
 if __name__ == "__main__":
