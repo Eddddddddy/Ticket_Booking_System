@@ -21,9 +21,9 @@ class SQL:
         self.ms.ExecNonQuery("insert into reservation values ('%s','%s','%s')" % (
             ID, flight_no, seat_no))
 
-    def seat_add(self, ID, seat_a, seat_b, seat_a_price, seat_b_price):
+    def seat_add(self, flight_no, seat_a, seat_b, seat_a_price, seat_b_price):
         self.ms.ExecNonQuery("insert into seat values ('%s','%s','%s','%s','%s')" % (
-            ID, seat_a, seat_b, seat_a_price, seat_b_price))
+            flight_no, seat_a, seat_b, seat_a_price, seat_b_price))
 
     def bill_add(self, ID, price, finish):
         self.ms.ExecNonQuery("insert into bill values ('%s','%s','%s')" % (
@@ -65,8 +65,25 @@ class SQL:
     def bill_get(self, ID):
         return self.ms.ExecQuery("SELECT * FROM bill WHERE ID='%s'" % ID)
 
-    def save_seat(self,flight_no,seat_a,seat_b):
-        return self.ms.ExecNonQuery("UPDATE seat SET seat_a='%s',seat_b='%s' WHERE flight_no='%s'" % (seat_a,seat_b,flight_no))
+    def save_seat(self, flight_no, seat_a, seat_b):
+        return self.ms.ExecNonQuery(
+            "UPDATE seat SET seat_a='%s',seat_b='%s' WHERE flight_no='%s'" % (seat_a, seat_b, flight_no))
+
+    def del_flight(self, flight_no):
+        return self.ms.ExecNonQuery("DELETE FROM airplane WHERE flight_no='%s'" % flight_no)
+
+    def del_passenger(self, ID):
+        return self.ms.ExecNonQuery("DELETE FROM passenger,bill,collection,reservation WHERE ID='%s'" % ID)
+
+    def mod_flight(self, flight_no, to_c, from_c, plane_no, time_l, time_a):
+        return self.ms.ExecNonQuery(
+            "UPDATE airplane SET to_c='%s', from_c='%s', plane_no='%s', time_l='%s', time_a='%s' WHERE flight_no='%s'" % (
+                to_c, from_c, plane_no, time_l, time_a, flight_no))
+
+    def mod_passenger(self, ID, name, sex, tel, nationality):
+        return self.ms.ExecNonQuery(
+            "UPDATE passenger SET name='%s', sex='%s', tel='%s', nationality='%s' WHERE ID='%s'" % (
+                name, sex, tel, nationality, ID))
 
 
 sql = SQL()
