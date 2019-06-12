@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Form_user</class>
+ <widget class="QWidget" name="Form_user">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1130</width>
+    <width>1131</width>
     <height>817</height>
    </rect>
   </property>
@@ -72,7 +72,7 @@
           </size>
          </property>
          <property name="text">
-          <string>乘客信息</string>
+          <string>选座购票</string>
          </property>
         </widget>
        </item>
@@ -85,7 +85,7 @@
           </size>
          </property>
          <property name="text">
-          <string>座位情况</string>
+          <string>取票通知</string>
          </property>
         </widget>
        </item>
@@ -98,7 +98,7 @@
           </size>
          </property>
          <property name="text">
-          <string>付款信息</string>
+          <string>个人信息</string>
          </property>
         </widget>
        </item>
@@ -108,7 +108,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page">
        <widget class="QTableWidget" name="table_flight">
@@ -285,217 +285,7 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QPushButton" name="pushButton_flight_add">
-           <property name="text">
-            <string>增加</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_flight_del">
-           <property name="text">
-            <string>删除</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_flight_mod">
-           <property name="text">
-            <string>修改</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="pushButton_flight_ser">
-           <property name="text">
-            <string>查询</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="page_2">
-       <widget class="QTableWidget" name="table_passenger">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>70</y>
-          <width>851</width>
-          <height>701</height>
-         </rect>
-        </property>
-        <property name="rowCount">
-         <number>100</number>
-        </property>
-        <property name="columnCount">
-         <number>5</number>
-        </property>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <column>
-         <property name="text">
-          <string>身份证号</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>姓名</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>性别</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>电话</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>国籍</string>
-         </property>
-        </column>
-       </widget>
-       <widget class="QFrame" name="frame_2">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>10</y>
-          <width>831</width>
-          <height>52</height>
-         </rect>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QPushButton" name="pushButton_passenger_add">
-           <property name="text">
-            <string>增加</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_passenger_del">
-           <property name="text">
-            <string>删除</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_passenger_mod">
-           <property name="text">
-            <string>修改</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_passenger_ser">
            <property name="text">
             <string>查询</string>
            </property>
@@ -1354,149 +1144,255 @@
           </item>
          </layout>
         </widget>
+        <widget class="QPushButton" name="pushButton_buy_submit">
+         <property name="geometry">
+          <rect>
+           <x>320</x>
+           <y>650</y>
+           <width>93</width>
+           <height>28</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>提交</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>190</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>姓名：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_notice_name">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>190</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>[姓名]</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>230</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>电话：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_notice_tel">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>230</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>[电话]</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>310</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>所购机票：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_notice_flight">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>310</y>
+          <width>601</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>[航班号]</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>270</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>总价：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_notice_total">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>270</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>[总价]</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="page_4">
-       <widget class="QTableWidget" name="table_bill">
+       <widget class="QLabel" name="label_9">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>30</y>
-          <width>851</width>
-          <height>741</height>
+          <x>310</x>
+          <y>230</y>
+          <width>72</width>
+          <height>15</height>
          </rect>
         </property>
-        <property name="rowCount">
-         <number>100</number>
+        <property name="text">
+         <string>姓名：</string>
         </property>
-        <property name="columnCount">
-         <number>5</number>
+       </widget>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>280</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
         </property>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <column>
-         <property name="text">
-          <string>身份证号</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>姓名</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>所购航班</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>总价</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>是否付款</string>
-         </property>
-        </column>
+        <property name="text">
+         <string>身份证号：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>330</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>性别：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>380</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>电话号码：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_13">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>430</y>
+          <width>72</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>国籍：</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_inf_name">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>230</y>
+          <width>113</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_inf_ID">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>280</y>
+          <width>113</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_inf_sex">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>330</y>
+          <width>113</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_inf_tel">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>380</y>
+          <width>113</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_inf_nationality">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>430</y>
+          <width>113</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_inf_submit">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>490</y>
+          <width>93</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>提交</string>
+        </property>
        </widget>
       </widget>
      </widget>

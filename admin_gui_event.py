@@ -4,23 +4,38 @@ from PyQt5.QtWidgets import *
 from admin import Ui_Form
 from add_flight import Ui_Dialog
 from add_passenger import Ui_Dialog_2
+from ser_flight import Ui_Dialog_ser_flight
+from ser_passenger import Ui_Dialog_ser_passenger
 import sql
 import time
 import datetime
 
 
-class add_passenger_window(QtWidgets.QWidget,Ui_Dialog_2):
+class ser_flight_window(QtWidgets.QWidget, Ui_Dialog_ser_flight):
     def __init__(self):
-        super(add_passenger_window,self).__init__()
+        super(ser_flight_window, self).__init__()
+        self.setupUi(self)
+
+
+class ser_passenger_window(QtWidgets.QWidget, Ui_Dialog_ser_passenger):
+    def __init__(self):
+        super(ser_passenger_window, self).__init__()
+        self.setupUi(self)
+
+
+class add_passenger_window(QtWidgets.QWidget, Ui_Dialog_2):
+    def __init__(self):
+        super(add_passenger_window, self).__init__()
         self.setupUi(self)
         self.pushButton_cancel.clicked.connect(self.button_cancel)
 
     def button_cancel(self):
         self.hide()
 
-class add_flight_window(QtWidgets.QWidget,Ui_Dialog):
+
+class add_flight_window(QtWidgets.QWidget, Ui_Dialog):
     def __init__(self):
-        super(add_flight_window,self).__init__()
+        super(add_flight_window, self).__init__()
         self.setupUi(self)
         self.pushButton_cancel.clicked.connect(self.button_cancel)
 
@@ -30,6 +45,11 @@ class add_flight_window(QtWidgets.QWidget,Ui_Dialog):
 
 class admin_window(QtWidgets.QWidget, Ui_Form):
     flight_item = ''
+    add_flight_times = 0
+    add_passenger_times = 0
+    ser_passenger_times = 0
+    ser_flight_times = 0
+
     def __init__(self):
         super(admin_window, self).__init__()
 
@@ -163,12 +183,11 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         self.pushButton_flight_del.clicked.connect(self.flight_del)
         self.pushButton_flight_mod.clicked.connect(self.flight_mod)
         self.pushButton_flight_add.clicked.connect(self.flight_add)
-
-        #self.pushButton_flight_ser.clicked.connect(self.flight_ser)
+        self.pushButton_flight_ser.clicked.connect(self.flight_ser)
         self.pushButton_passenger_del.clicked.connect(self.passenger_del)
         self.pushButton_passenger_mod.clicked.connect(self.passenger_mod)
-        #self.pushButton_passenger_add.clicked.connect(self.passenger_add)
-        #self.pushButton_passenger_ser.clicked.connect(self.passenger_ser)
+        self.pushButton_passenger_add.clicked.connect(self.passenger_add)
+        self.pushButton_passenger_ser.clicked.connect(self.passenger_ser)
 
         self.S = sql.SQL()
         self.add_table_flight()
@@ -199,6 +218,18 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
             self.table_flight.setItem(i, 3, QTableWidgetItem(row[3]))
             self.table_flight.setItem(i, 4, QTableWidgetItem(row[4].strftime("%Y-%m-%d %H:%M:%S")))
             self.table_flight.setItem(i, 5, QTableWidgetItem(row[5].strftime("%Y-%m-%d %H:%M:%S")))
+            seat = self.S.seat_get(row[0])
+            seat_ab = 0
+            print(seat)
+            for row_seat in seat:
+                for c in row_seat[1]:
+                    if c == '1':
+                        seat_ab = seat_ab + 1
+                for c in row_seat[2]:
+                    if c == '1':
+                        seat_ab = seat_ab + 1
+            self.table_flight.setItem(i, 6, QTableWidgetItem(str(int(seat_ab * 100 / 110))+'%'))
+            print(seat_ab)
             i = i + 1
 
     def add_table_passenger(self):
@@ -220,10 +251,9 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         for row in result_bill:
             result_flight_no = self.S.reservation_get_backFlight_no(row[0])
             str = ''
-            j = 0
+            print(result_flight_no)
             for row_1 in result_flight_no:
-                str = str + row_1[j] + ' '
-                j = j + 1
+                str = str + row_1[0] + ' '
             result_name = self.S.passenger_get(row[0])
             for row_1 in result_name:
                 str_1 = row_1[1]
@@ -503,11 +533,49 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
                           self.table_flight.item(row, 5).text())
         self.flash_admin()
 
-    def in_flight_win(self,flight_win):
-        self.add_flight_win=flight_win
+    def in_flight_win(self, flight_win):
+        self.add_flight_win = flight_win
 
-    def in_passenger_win(self,passenger_win):
-        self.add_passenger_win=passenger_win
+    def in_passenger_win(self, passenger_win):
+        self.add_passenger_win = passenger_win
+
+    def in_flight_ser_win(self, flight_ser_win):
+        self.ser_flight_win = flight_ser_win
+
+    def in_passenger_ser_win(self, passenger_ser_win):
+        self.ser_passenger_win = passenger_ser_win
+
+    def passenger_ser(self):
+        self.ser_passenger_win.show()
+        if self.ser_passenger_times == 0:
+            self.ser_passenger_win.pushButton_ser_passenger.clicked.connect(self.passenger_ser_2)
+            self.ser_passenger_times = 1
+
+    def passenger_ser_2(self):
+        i = 0
+        str = self.ser_passenger_win.lineEdit_ser_passenger.text()
+        while i < 100:
+            if str == self.table_passenger.item(i, 0).text():
+                self.table_passenger.selectRow(i)
+                break
+            i = i + 1
+        self.ser_passenger_win.hide()
+
+    def flight_ser(self):
+        self.ser_flight_win.show()
+        if self.ser_flight_times == 0:
+            self.ser_flight_win.pushButton_ser_flight.clicked.connect(self.flight_ser_2)
+            self.ser_flight_times = 1
+
+    def flight_ser_2(self):
+        i = 0
+        str = self.ser_flight_win.lineEdit_ser_flight.text()
+        while i < 100:
+            if str == self.table_flight.item(i, 0).text():
+                self.table_flight.selectRow(i)
+                break
+            i = i + 1
+        self.ser_flight_win.hide()
 
     def flight_add(self):
         self.add_flight_win.lineEdit_time_a.clear()
@@ -517,7 +585,9 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         self.add_flight_win.lineEdit_to_c.clear()
         self.add_flight_win.lineEdit_flight.clear()
         self.add_flight_win.show()
-        self.add_flight_win.pushButton_ok.clicked.connect(self.flight_add_2)
+        if self.add_flight_times == 0:
+            self.add_flight_win.pushButton_ok.clicked.connect(self.flight_add_2)
+            self.add_flight_times = 1
 
     def flight_add_2(self):
         self.S.airplane_add(self.add_flight_win.lineEdit_flight.text(),
@@ -534,6 +604,29 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         self.add_flight_win.hide()
         self.flash_admin()
 
+    def passenger_add(self):
+        self.add_passenger_win.lineEdit_ID.clear()
+        self.add_passenger_win.lineEdit_name.clear()
+        self.add_passenger_win.lineEdit_nationality.clear()
+        self.add_passenger_win.lineEdit_sex.clear()
+        self.add_passenger_win.lineEdit_tel.clear()
+        self.add_passenger_win.show()
+        if self.add_passenger_times == 0:
+            self.add_passenger_win.pushButton_ok.clicked.connect(self.passenger_add_2)
+            self.add_passenger_times = 1
+
+    def passenger_add_2(self):
+        self.S.passenger_add(self.add_passenger_win.lineEdit_ID.text(),
+                             self.add_passenger_win.lineEdit_name.text(),
+                             self.add_passenger_win.lineEdit_sex.text(),
+                             self.add_passenger_win.lineEdit_tel.text(),
+                             self.add_passenger_win.lineEdit_nationality.text())
+        self.S.bill_add(self.add_passenger_win.lineEdit_ID.text(),
+                        '0',
+                        '0')
+        self.add_passenger_win.hide()
+        self.flash_admin()
+
     def passenger_del(self):
         row = self.table_passenger.currentRow()
         print(self.table_passenger.item(row, 0).text())
@@ -546,8 +639,7 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
                              self.table_passenger.item(row, 1).text(),
                              self.table_passenger.item(row, 2).text(),
                              self.table_passenger.item(row, 3).text(),
-                             self.table_passenger.item(row, 4).text(),
-                             self.table_passenger.item(row, 5).text())
+                             self.table_passenger.item(row, 4).text())
         self.flash_admin()
 
     def seat_button_a1(self):
@@ -990,18 +1082,23 @@ class admin_window(QtWidgets.QWidget, Ui_Form):
         self.pushButton_l11.setText("0") if self.pushButton_l11.text() == '1' else self.pushButton_l11.setText('1')
         self.saveSeat()
 
+class link_admin:
+    def __init__(self):
+        if __name__ == "__main__":
+            import sys
 
-if __name__ == "__main__":
-    import sys
+            app = QtWidgets.QApplication(sys.argv)
 
-    app = QtWidgets.QApplication(sys.argv)
+            admin_win = admin_window()
+            add_flight_win = add_flight_window()
+            add_passenger_win = add_passenger_window()
+            ser_flight_win = ser_flight_window()
+            ser_passenger_win = ser_passenger_window()
 
-    admin_win = admin_window()
-    add_flight_win=add_flight_window()
-    add_passenger_win=add_passenger_window()
+            admin_win.show()
+            admin_win.in_flight_win(add_flight_win)
+            admin_win.in_passenger_win(add_passenger_win)
+            admin_win.in_flight_ser_win(ser_flight_win)
+            admin_win.in_passenger_ser_win(ser_passenger_win)
 
-    admin_win.show()
-    admin_win.in_flight_win(add_flight_win)
-    admin_win.in_passenger_win(add_passenger_win)
-
-    sys.exit(app.exec_())
+            sys.exit(app.exec_())

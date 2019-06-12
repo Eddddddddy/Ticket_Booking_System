@@ -6,6 +6,7 @@ class SQL:
         self.ms = sql_m.SQL(host="127.0.0.1", user="root", pwd="wangdingyi110", db="airplane")
 
     def airplane_add(self, flight_no, to_c, from_c, plane_no, time_l, time_a):
+        print(666666)
         self.ms.ExecNonQuery("insert into airplane values ('%s','%s','%s','%s','%s','%s')" % (
             flight_no, to_c, from_c, plane_no, time_l, time_a))
 
@@ -59,6 +60,9 @@ class SQL:
     def reservation_get_backFlight_no(self, ID):
         return self.ms.ExecQuery("SELECT flight_no FROM reservation WHERE ID='%s'" % ID)
 
+    def reservation_get_backFlight_no_seat(self, ID):
+        return self.ms.ExecQuery("SELECT flight_no,seat_no FROM reservation WHERE ID='%s'" % ID)
+
     def seat_get(self, flight_no):
         return self.ms.ExecQuery("SELECT * FROM seat WHERE flight_no='%s'" % flight_no)
 
@@ -73,7 +77,7 @@ class SQL:
         return self.ms.ExecNonQuery("DELETE FROM airplane WHERE flight_no='%s'" % flight_no)
 
     def del_passenger(self, ID):
-        return self.ms.ExecNonQuery("DELETE FROM passenger,bill,collection,reservation WHERE ID='%s'" % ID)
+        return self.ms.ExecNonQuery("DELETE FROM passenger WHERE ID='%s'" % ID)
 
     def mod_flight(self, flight_no, to_c, from_c, plane_no, time_l, time_a):
         return self.ms.ExecNonQuery(
@@ -84,6 +88,14 @@ class SQL:
         return self.ms.ExecNonQuery(
             "UPDATE passenger SET name='%s', sex='%s', tel='%s', nationality='%s' WHERE ID='%s'" % (
                 name, sex, tel, nationality, ID))
+
+    def mod_reservation(self, ID, flight_no,seat):
+        return self.ms.ExecNonQuery("UPDATE reservation SET seat_no='%s' WHERE ID='%s' and flight_no='%s'" % (
+            seat, ID,flight_no))
+
+    def get_reservation_bill(self, ID):
+        return self.ms.ExecQuery(
+            "select sum(seat_a_price) from seat where flight_no in (select flight_no from reservation where ID='%s');" % ID)
 
 
 sql = SQL()
