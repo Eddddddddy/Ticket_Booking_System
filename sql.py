@@ -25,9 +25,9 @@ class SQL:
         self.ms.ExecNonQuery("insert into seat values ('%s','%s','%s','%s','%s')" % (
             ID, seat_a, seat_b, seat_a_price, seat_b_price))
 
-    def bill_add(self, ID, price):
-        self.ms.ExecNonQuery("insert into bill values ('%s','%s')" % (
-            ID, price))
+    def bill_add(self, ID, price, finish):
+        self.ms.ExecNonQuery("insert into bill values ('%s','%s','%s')" % (
+            ID, price, finish))
 
     def airplane_getAll(self):
         return self.ms.ExecQuery("SELECT * FROM airplane")
@@ -46,6 +46,27 @@ class SQL:
 
     def bill_getAll(self):
         return self.ms.ExecQuery("SELECT * FROM bill")
+
+    def airplane_get(self, flight_no):
+        return self.ms.ExecQuery("SELECT * FROM airplane WHERE flight_no='%s'" % flight_no)
+
+    def passenger_get(self, ID):
+        return self.ms.ExecQuery("SELECT * FROM passenger WHERE ID='%s'" % ID)
+
+    def collection_get(self, ID):
+        return self.ms.ExecQuery("SELECT * FROM collection WHERE ID='%s'" % ID)
+
+    def reservation_get_backFlight_no(self, ID):
+        return self.ms.ExecQuery("SELECT flight_no FROM reservation WHERE ID='%s'" % ID)
+
+    def seat_get(self, flight_no):
+        return self.ms.ExecQuery("SELECT * FROM seat WHERE flight_no='%s'" % flight_no)
+
+    def bill_get(self, ID):
+        return self.ms.ExecQuery("SELECT * FROM bill WHERE ID='%s'" % ID)
+
+    def save_seat(self,flight_no,seat_a,seat_b):
+        return self.ms.ExecNonQuery("UPDATE seat SET seat_a='%s',seat_b='%s' WHERE flight_no='%s'" % (seat_a,seat_b,flight_no))
 
 
 sql = SQL()
