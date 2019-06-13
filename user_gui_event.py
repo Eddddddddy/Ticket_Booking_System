@@ -463,11 +463,17 @@ class user_window(QtWidgets.QWidget, Ui_Form_user):
         self.ser_flight_win.hide()
 
     def buy_submit(self):
-        print(self.lineEdit_inf_ID.text())
+
         try:
-            self.S.mod_reservation(self.lineEdit_inf_ID.text(), self.flight_item, self.state)
-        except Exception:
             self.S.reservation_add(self.lineEdit_inf_ID.text(), self.flight_item, self.state)
+        except Exception:
+            pass
+
+        print(self.lineEdit_inf_ID.text())
+        # try:
+        #     self.S.mod_reservation(self.lineEdit_inf_ID.text(), self.flight_item, self.state)
+        # except Exception:
+        #     self.S.reservation_add(self.lineEdit_inf_ID.text(), self.flight_item, self.state)
         self.print_bill()
         self.add_table_flight()
 
